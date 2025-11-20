@@ -43,7 +43,7 @@ public class SimulacaoService {
         double valorLiquido = valorFinal - imposto;
 
         Simulacao simulacao = new Simulacao();
-        simulacao.setClienteId(cliente.getId());
+        simulacao.setCliente(cliente);
         simulacao.setProduto(produtoRecomendado.getNome());
         simulacao.setValorInvestido(request.getValor());
         simulacao.setValorFinal(valorFinal);
@@ -89,7 +89,7 @@ public class SimulacaoService {
     return simulacoes.stream().map(s -> {
         SimulacaoHistoricoDTO dto = new SimulacaoHistoricoDTO();
         dto.setId(s.getId());
-        dto.setClienteId(s.getClienteId());
+        dto.setCliente(s.getCliente().getId());
         dto.setProduto(s.getProduto());
         dto.setValorInvestido(s.getValorInvestido());
         dto.setValorFinal(s.getValorFinal());

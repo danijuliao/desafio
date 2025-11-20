@@ -3,6 +3,9 @@ package com.perfil.api.controller;
 import com.perfil.api.dto.ProdutoDTO;
 import com.perfil.api.service.ProdutoService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
@@ -17,7 +20,10 @@ public class ProdutoController {
     }
 
     @GetMapping("/{perfil}")
-    public List<ProdutoDTO> listarPorPerfil(@PathVariable String perfil) {
-        return produtoService.listarPorPerfil(perfil);
+    public Page<ProdutoDTO> listarPorPerfil(@PathVariable String perfil,
+                                            @RequestParam(defaultValue = "0") int page,
+                                            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return produtoService.listarPorPerfil(perfil, pageable);
     }
 }

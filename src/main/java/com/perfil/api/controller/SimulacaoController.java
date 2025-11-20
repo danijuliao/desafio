@@ -3,6 +3,7 @@ package com.perfil.api.controller;
 import com.perfil.api.dto.SimulacaoRequestDTO;
 import com.perfil.api.dto.SimulacaoResponseDTO;
 import com.perfil.api.service.SimulacaoService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,7 +17,7 @@ public class SimulacaoController {
     }
 
     @PostMapping
-    public SimulacaoResponseDTO simular(@RequestBody SimulacaoRequestDTO request) {
+    public SimulacaoResponseDTO simular(@Valid @RequestBody SimulacaoRequestDTO request) {
         return simulacaoService.simularInvestimento(request);
     }
 }

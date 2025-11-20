@@ -1,10 +1,17 @@
 package com.perfil.api.dto;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 public class SimulacaoRequestDTO {
+
+    @NotNull
     private Long clienteId;
+    @Positive
     private Double valor;
-    private Integer prazoMeses;
-    private String tipoProduto;
+    @Positive private Integer prazoMeses;
+    @NotNull private String tipoProduto;
+
     public Long getClienteId() {
         return clienteId;
     }

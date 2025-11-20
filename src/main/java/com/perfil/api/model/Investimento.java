@@ -1,7 +1,6 @@
 package com.perfil.api.model;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
@@ -12,72 +11,38 @@ public class Investimento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long clienteId;
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = false) // chave estrangeira
+    private Cliente cliente;
 
     private String tipo;
-
     private Double valor;
-
     private Double rentabilidade;
-
     private LocalDate data;
 
-    public Investimento(Long id, Long clienteId, String tipo, Double valor, Double rentabilidade, LocalDate data) {
-    this.id = id;
-    this.clienteId = clienteId;
-    this.tipo = tipo;
-    this.valor = valor;
-    this.rentabilidade = rentabilidade;
-    this.data = data;
-    }
+    public Investimento() {}
 
-    public Long getId() {
-        return id;
-    }
-
-    public Long getClienteId() {
-        return clienteId;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public Double getValor() {
-        return valor;
-    }
-
-    public Double getRentabilidade() {
-        return rentabilidade;
-    }
-
-    public LocalDate getData() {
-        return data;
-    }
-
-    public void setId(Long id) {
+    public Investimento(Long id, Cliente cliente, String tipo, Double valor, Double rentabilidade, LocalDate data) {
         this.id = id;
-    }
-
-    public void setClienteId(Long clienteId) {
-        this.clienteId = clienteId;
-    }
-
-    public void setTipo(String tipo) {
+        this.cliente = cliente;
         this.tipo = tipo;
-    }
-
-    public void setValor(Double valor) {
         this.valor = valor;
-    }
-
-    public void setRentabilidade(Double rentabilidade) {
         this.rentabilidade = rentabilidade;
-    }
-
-    public void setData(LocalDate data) {
         this.data = data;
     }
 
-    
+    // Getters e Setters
+    public Long getId() { return id; }
+    public Cliente getCliente() { return cliente; }
+    public String getTipo() { return tipo; }
+    public Double getValor() { return valor; }
+    public Double getRentabilidade() { return rentabilidade; }
+    public LocalDate getData() { return data; }
+
+    public void setId(Long id) { this.id = id; }
+    public void setCliente(Cliente cliente) { this.cliente = cliente; }
+    public void setTipo(String tipo) { this.tipo = tipo; }
+    public void setValor(Double valor) { this.valor = valor; }
+    public void setRentabilidade(Double rentabilidade) { this.rentabilidade = rentabilidade; }
+    public void setData(LocalDate data) { this.data = data; }
 }

@@ -16,6 +16,6 @@ public class PerfilRiscoController {
 
     @GetMapping("/{clienteId}")
     public PerfilRiscoDTO consultarPerfil(@PathVariable Long clienteId) {
-        return perfilRiscoService.consultarPerfil(clienteId);
+        return perfilRiscoService.calcularPerfil(clienteId);
     }
 }

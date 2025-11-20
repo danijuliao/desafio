@@ -18,6 +18,9 @@ public class Produto {
 
     private String risco;
 
+    public Produto() {
+    }
+
     public Produto(Long id, String nome, String tipo, Double rentabilidade, String risco) {
     this.id = id;
     this.nome = nome;

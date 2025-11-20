@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class SimulacaoHistoricoDTO {
     private Long id;
-    private Long clienteId;
+    private Long cliente;
     private String produto;
     private Double valorInvestido;
     private Double valorFinal;
@@ -14,7 +14,7 @@ public class SimulacaoHistoricoDTO {
         return id;
     }
     public Long getClienteId() {
-        return clienteId;
+        return cliente;
     }
     public String getProduto() {
         return produto;
@@ -34,8 +34,8 @@ public class SimulacaoHistoricoDTO {
     public void setId(Long id) {
         this.id = id;
     }
-    public void setClienteId(Long clienteId) {
-        this.clienteId = clienteId;
+    public void setCliente(Long clienteId) {
+        this.cliente = clienteId;
     }
     public void setProduto(String produto) {
         this.produto = produto;

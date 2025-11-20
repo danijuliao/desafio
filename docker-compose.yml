@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  api-investimentos:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./investimentos.db:/app/investimentos.db

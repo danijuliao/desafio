@@ -3,6 +3,11 @@ $env:JAVA_HOME = "C:\Users\c125762\tools\Java\jdk-21.0.9"
 $env:MAVEN_HOME = "C:\Users\c125762\tools\apache-maven-3.9.11"
 $env:PATH = "$env:JAVA_HOME\bin;$env:MAVEN_HOME\bin;$env:PATH"
 
+#computador pessoal
+$env:JAVA_HOME = "C:\temp\tools\Java\jdk-21"
+$env:MAVEN_HOME = "C:\temp\tools\apache-maven-3.9.11"
+$env:PATH = "$env:JAVA_HOME\bin;$env:MAVEN_HOME\bin;$env:PATH"
+
 Write-Host "Configuração aplicada:"
 Write-Host "JAVA_HOME = $env:JAVA_HOME"
 Write-Host "MAVEN_HOME = $env:MAVEN_HOME"

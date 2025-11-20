@@ -116,15 +116,15 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.gwenn</groupId>
-            <artifactId>sqlite-dialect</artifactId>
-            <version>0.1.0</version>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.2.7.Final</version> <!-- ou a versão mais recente disponível -->
         </dependency>
 
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-community-dialects</artifactId>
-            <version>6.4.4.Final</version> <!-- compatível com Spring Boot 3.x -->
+            <version>6.2.7.Final</version> <!-- mesma versão do hibernate-core -->
         </dependency>
 
         <!-- JWT -->

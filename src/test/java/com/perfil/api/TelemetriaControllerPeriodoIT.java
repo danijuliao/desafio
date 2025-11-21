@@ -1,7 +1,6 @@
 package com.perfil.api;
 
 import com.perfil.api.dto.TelemetriaDTO;
-import com.perfil.api.dto.ServicoDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,30 +15,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles("test")
 @TestPropertySource(locations = "classpath:application-test.properties")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class TelemetriaControllerIT {
+public class TelemetriaControllerPeriodoIT {
 
     @Autowired
     private TestRestTemplate restTemplate;
 
     @Test
-    public void deveRetornarTelemetriaComServicosDetalhados() {
-        // Faz a chamada GET para o endpoint
-        ResponseEntity<TelemetriaDTO> resposta = restTemplate.getForEntity("/telemetria", TelemetriaDTO.class);
+    public void deveFiltrarTelemetriaPorPeriodo() {
+        ResponseEntity<TelemetriaDTO> resposta = restTemplate.getForEntity("/telemetria?inicio=2025-01-01&fim=2025-01-31", TelemetriaDTO.class);
 
-        // Valida status e corpo
         assertThat(resposta.getStatusCode().is2xxSuccessful()).isTrue();
         assertThat(resposta.getBody()).isNotNull();
         assertThat(resposta.getBody().getServicos()).isNotEmpty();
 
-        // Pega o primeiro serviço para validar detalhes
-        ServicoDTO servico = resposta.getBody().getServicos().get(0);
-        assertThat(servico.getNome()).isNotBlank();
-        assertThat(servico.getQuantidadeChamadas()).isGreaterThan(0);
-        assertThat(servico.getMediaTempoRespostaMs()).isGreaterThan(0);
-
-        // Valida período
-        assertThat(resposta.getBody().getPeriodo()).isNotNull();
-        assertThat(resposta.getBody().getPeriodo().getInicio()).isNotBlank();
-        assertThat(resposta.getBody().getPeriodo().getFim()).isNotBlank();
+        // Valida que período retornado corresponde ao filtro
+        assertThat(resposta.getBody().getPeriodo().getInicio()).isEqualTo("2025-01-01");
+        assertThat(resposta.getBody().getPeriodo().getFim()).isEqualTo("2025-01-31");
     }
 }

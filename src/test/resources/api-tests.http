@@ -1,0 +1,46 @@
+### 1. Autenticação
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "username": "DaniTeste",
+  "password": "Teste01"
+}
+
+> {% client.global.set("auth_token", response.body.token) %}
+
+### 2. Simulação de Investimento
+POST http://localhost:8080/simular-investimento
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "clienteId": 123,
+  "valor": 10000.00,
+  "prazoMeses": 12,
+  "tipoProduto": "CDB"
+}
+
+### 3. Histórico de Simulações
+GET http://localhost:8080/simulacoes
+Authorization: Bearer {{auth_token}}
+
+### 4. Valores Simulados por Produto e Dia
+GET http://localhost:8080/simulacoes/por-produto-dia
+Authorization: Bearer {{auth_token}}
+
+### 5. Telemetria
+GET http://localhost:8080/telemetria
+Authorization: Bearer {{auth_token}}
+
+### 6. Perfil de Risco
+GET http://localhost:8080/perfil-risco/123
+Authorization: Bearer {{auth_token}}
+
+### 7. Produtos Recomendados
+GET http://localhost:8080/produtos-recomendados/Moderado
+Authorization: Bearer {{auth_token}}
+
+### 8. Histórico de Investimentos
+GET http://localhost:8080/investimentos/123
+Authorization: Bearer {{auth_token}}

@@ -1,16 +1,24 @@
 package com.perfil.api.dto;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 
 public class SimulacaoRequestDTO {
 
-    @NotNull
+    @NotNull(message = "ClienteId é obrigatório")
     private Long clienteId;
-    @Positive
+
+    @NotNull(message = "Valor é obrigatório")
+    @Min(value = 1, message = "Valor deve ser maior que zero")
     private Double valor;
-    @Positive private Integer prazoMeses;
-    @NotNull private String tipoProduto;
+
+
+    @NotNull(message = "Prazo é obrigatório")
+    @Min(value = 1, message = "Prazo deve ser maior que zero")
+    private Integer prazoMeses;
+
+    @NotNull(message = "Tipo de produto é obrigatório")
+    private String tipoProduto;
 
     public Long getClienteId() {
         return clienteId;

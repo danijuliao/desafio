@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -33,6 +34,7 @@ public class SimulacaoServiceTest {
     @Mock
     private ProdutoRepository produtoRepository;
 
+
     @InjectMocks
     private SimulacaoService simulacaoService;
 
@@ -42,35 +44,35 @@ public class SimulacaoServiceTest {
 
     @Test
     public void deveSimularInvestimentoComSucesso() {
-
+        // Dados de entrada
         SimulacaoRequestDTO request = new SimulacaoRequestDTO();
         request.setClienteId(1L);
         request.setValor(1000.0);
-        request.setPrazoMeses(12);
-        request.setTipoProduto("CDB");
-
-
+        // Mock Cliente
         Cliente cliente = new Cliente();
         cliente.setId(1L);
         cliente.setNome("Cliente Teste");
         when(clienteRepository.findById(1L)).thenReturn(Optional.of(cliente));
 
-
+        // Mock Produto
         Produto produto = new Produto();
         produto.setId(101L);
         produto.setNome("CDB Caixa 2026");
         produto.setTipo("CDB");
         produto.setRentabilidade(0.12);
         produto.setRisco("Baixo");
-
         when(produtoRepository.findByTipo("CDB")).thenReturn(List.of(produto));
 
+        // Mock persistência
+        when(simulacaoRepository.save(any())).thenAnswer(invocation -> invocation.getArgument(0));
+
+        // Executa método
         SimulacaoResponseDTO response = simulacaoService.simularInvestimento(request);
 
+        // Asserts
         assertThat(response).isNotNull();
         assertThat(response.getResultadoSimulacao()).isNotNull();
         assertThat(response.getResultadoSimulacao().getValorFinal()).isGreaterThan(1000.0);
         assertThat(response.getResultadoSimulacao().getPrazoMeses()).isEqualTo(12);
-
     }
 }

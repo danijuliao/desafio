@@ -4,6 +4,8 @@ import com.perfil.api.dto.TelemetriaDTO;
 import com.perfil.api.service.TelemetriaService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/telemetria")
 public class TelemetriaController {
@@ -15,7 +17,13 @@ public class TelemetriaController {
     }
 
     @GetMapping
-    public TelemetriaDTO consultarTelemetria() {
-        return telemetriaService.consultarTelemetria();
+    public TelemetriaDTO consultarTelemetria(@RequestParam String inicio, @RequestParam String fim) {
+        return telemetriaService.consultarTelemetria(inicio, fim);
     }
+
+    @GetMapping("/detalhada")
+    public Map<String, Object> consultarTelemetriaDetalhada() {
+        return telemetriaService.consultarTelemetriaDetalhada();
+    }
+
 }

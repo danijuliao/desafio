@@ -1,6 +1,7 @@
 package com.perfil.api.service;
 
 import com.perfil.api.dto.*;
+import com.perfil.api.exception.ClienteNaoEncontradoException;
 import com.perfil.api.model.*;
 import com.perfil.api.repository.*;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.List;
 public class SimulacaoService {
 
     private final ClienteRepository clienteRepository;
+
     private final ProdutoRepository produtoRepository;
     private final SimulacaoRepository simulacaoRepository;
 
@@ -28,14 +30,10 @@ public class SimulacaoService {
 
     public SimulacaoResponseDTO simularInvestimento(SimulacaoRequestDTO request) {
         Cliente cliente = clienteRepository.findById(request.getClienteId())
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+                .orElseThrow(() -> new ClienteNaoEncontradoException("Cliente não encontrado"));
 
         PerfilRisco perfil = cliente.getPerfilRisco();
-        List<Produto> produtos = produtoRepository.findByTipo(request.getTipoProduto());
-
-        Produto produtoRecomendado = produtos.stream()
-                .filter(p -> p.getRisco().equalsIgnoreCase(perfil.getPerfil()))
-                .max(Comparator.comparing(Produto::getRentabilidade))
+        Produto produtoRecomendado = produtoRepository.findFirstByTipoIgnoreCase(request.getTipoProduto())
                 .orElseThrow(() -> new RuntimeException("Nenhum produto compatível encontrado"));
 
         double valorFinal = calcularValorFinal(request.getValor(), produtoRecomendado.getRentabilidade(), request.getPrazoMeses());

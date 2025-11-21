@@ -11,10 +11,19 @@ public class Telemetria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "servico")
     private String nomeServico;
+
+    @Column(name = "quantidade_chamadas")
     private Integer quantidadeChamadas;
+
+    @Column(name = "media_tempo_resposta_ms")
     private Long mediaTempoRespostaMs;
+
+    @Column(name = "periodo_inicio")
     private String periodoInicio;
+
+    @Column(name = "periodo_fim")
     private String periodoFim;
     private LocalDateTime dataHora;
 

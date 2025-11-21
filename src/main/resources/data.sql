@@ -1,9 +1,9 @@
-INSERT INTO Cliente (nome, perfil_risco, pontuacao) VALUES
+INSERT INTO cliente (nome, perfil_risco, pontuacao) VALUES
 ('João Silva', 'Conservador', 30),
 ('Maria Souza', 'Moderado', 65),
 ('Carlos Pereira', 'Agressivo', 85);
 
-INSERT INTO Produto (nome, tipo, rentabilidade, risco) VALUES
+INSERT INTO produto (nome, tipo, rentabilidade, risco) VALUES
 ('CDB Caixa 2026', 'CDB', 0.12, 'Baixo'),
 ('LCI Caixa 2026', 'LCI', 0.10, 'Baixo'),
 ('Fundo XPTO', 'Fundo', 0.18, 'Alto'),

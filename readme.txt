@@ -1,6 +1,8 @@
-Painel de Investimentos com Perfil de Risco Dinâmico
-Objetivo
-Este projeto implementa uma API REST em Java 21 com Spring Boot para simulação de investimentos, recomendação de produtos e análise de perfil de risco, conforme desafio proposto.
+Projeto desenvolvido para desafio de processo seletivo interno da Caixa
+
+Painel de Investimentos com Perfil de Risco Dinâmico com objetivo de implementar uma API REST
+em Java 21 com Spring Boot para simulação de investimentos, recomendação de produtos e análise de perfil de risco, conforme desafio proposto.
+
 A aplicação:
 
 Analisa comportamento financeiro do cliente.
@@ -120,7 +122,7 @@ Status atual: Ajustes no contexto SQLite em andamento. Próxima atualização co
 
 
 Evidências
-As evidências de execução dos endpoints estão disponíveis na pasta docs.
+
 Exemplos:
 
 Simulação de investimento: simulacao.png
@@ -132,10 +134,6 @@ Próximos Passos
 Corrigir configuração do SQLite para testes.
 Garantir execução completa dos testes de integração.
 Publicar imagem Docker funcional.
-
-
-Licença
-Projeto desenvolvido para desafio de processo seletivo interno da Caixa.
 
 # Caminhos locais para configuração de versões
 $env:JAVA_HOME = "C:\Users\c125762\tools\Java\jdk-21.0.9"

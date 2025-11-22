@@ -1,67 +1,62 @@
--- Tabela clientes
-CREATE TABLE IF NOT EXISTS clientes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome TEXT NOT NULL,
-    cpf TEXT,
-    email TEXT,
-    telefone TEXT,
-    preferencia_liquidez TEXT,
-    preferencia_rentabilidade TEXT
+CREATE TABLE clientes (
+                          id INT IDENTITY(1,1) PRIMARY KEY,
+                          nome NVARCHAR(255) NOT NULL,
+                          cpf NVARCHAR(255),
+                          email NVARCHAR(255),
+                          telefone NVARCHAR(255),
+                          preferencia_liquidez NVARCHAR(255),
+                          preferencia_rentabilidade NVARCHAR(255),
+                          perfil_risco NVARCHAR(255),
+                          pontuacao INT
 );
 
--- Tabela perfis_risco
-CREATE TABLE IF NOT EXISTS perfis_risco (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    cliente_id INTEGER NOT NULL,
-    perfil TEXT,
-    pontuacao INTEGER,
-    descricao TEXT,
-    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+CREATE TABLE perfis_risco (
+                              id INT IDENTITY(1,1) PRIMARY KEY,
+                              cliente_id INT NOT NULL,
+                              perfil NVARCHAR(255),
+                              pontuacao INT,
+                              descricao NVARCHAR(MAX),
+                              FOREIGN KEY (cliente_id) REFERENCES clientes(id)
 );
 
--- Tabela produtos
-CREATE TABLE IF NOT EXISTS produtos (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome TEXT NOT NULL,
-    tipo TEXT NOT NULL,
-    rentabilidade REAL NOT NULL,
-    risco TEXT NOT NULL
+CREATE TABLE produtos (
+                          id INT IDENTITY(1,1) PRIMARY KEY,
+                          nome NVARCHAR(255) NOT NULL,
+                          tipo NVARCHAR(255) NOT NULL,
+                          rentabilidade REAL NOT NULL,
+                          risco NVARCHAR(255) NOT NULL
 );
 
--- Tabela simulacoes
-CREATE TABLE IF NOT EXISTS simulacoes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    cliente_id INTEGER NOT NULL,
-    produto TEXT NOT NULL,
-    valor_investido REAL NOT NULL,
-    valor_final REAL NOT NULL,
-    prazo_meses INTEGER NOT NULL,
-    data_simulacao TEXT NOT NULL,
-    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+CREATE TABLE simulacoes (
+                            id INT IDENTITY(1,1) PRIMARY KEY,
+                            cliente_id INT NOT NULL,
+                            produto NVARCHAR(255) NOT NULL,
+                            valor_investido REAL NOT NULL,
+                            valor_final REAL NOT NULL,
+                            prazo_meses INT NOT NULL,
+                            data_simulacao NVARCHAR(255) NOT NULL,
+                            FOREIGN KEY (cliente_id) REFERENCES clientes(id)
 );
 
--- Tabela investimentos
-CREATE TABLE IF NOT EXISTS investimentos (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    cliente_id INTEGER NOT NULL,
-    tipo TEXT NOT NULL,
-    valor REAL NOT NULL,
-    rentabilidade REAL NOT NULL,
-    data TEXT NOT NULL,
-    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+CREATE TABLE investimentos (
+                               id INT IDENTITY(1,1) PRIMARY KEY,
+                               cliente_id INT NOT NULL,
+                               tipo NVARCHAR(255) NOT NULL,
+                               valor REAL NOT NULL,
+                               rentabilidade REAL NOT NULL,
+                               data NVARCHAR(255) NOT NULL,
+                               FOREIGN KEY (cliente_id) REFERENCES clientes(id)
 );
 
--- Tabela telemetria
-CREATE TABLE IF NOT EXISTS telemetria (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    servico TEXT NOT NULL,
-    quantidade_chamadas INTEGER NOT NULL,
-    media_tempo_resposta_ms INTEGER NOT NULL,
-    periodo_inicio TEXT NOT NULL,
-    periodo_fim TEXT NOT NULL,
-    data_hora TEXT
+CREATE TABLE telemetria (
+                            id INT IDENTITY(1,1) PRIMARY KEY,
+                            servico NVARCHAR(255) NOT NULL,
+                            quantidade_chamadas INT NOT NULL,
+                            media_tempo_resposta_ms INT NOT NULL,
+                            periodo_inicio NVARCHAR(255) NOT NULL,
+                            periodo_fim NVARCHAR(255) NOT NULL,
+                            data_hora NVARCHAR(255)
 );
 
--- Índices opcionais
-CREATE INDEX IF NOT EXISTS idx_simulacao_cliente ON simulacoes(cliente_id);
-CREATE INDEX IF NOT EXISTS idx_investimento_cliente ON investimentos(cliente_id);
+CREATE INDEX idx_simulacao_cliente ON simulacoes(cliente_id);
+CREATE INDEX idx_investimento_cliente ON investimentos(cliente_id);

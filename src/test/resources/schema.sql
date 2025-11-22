@@ -6,7 +6,9 @@ CREATE TABLE IF NOT EXISTS clientes (
     email TEXT,
     telefone TEXT,
     preferencia_liquidez TEXT,
-    preferencia_rentabilidade TEXT
+    preferencia_rentabilidade TEXT,
+    perfil_risco TEXT,
+    pontuacao INTEGER
 );
 
 -- Tabela perfis_risco
